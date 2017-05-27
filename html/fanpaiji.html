@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <style>
+    	*{
+    		padding:0;
+    		margin:0;
+    		box-sizing:border-box;
+    		outline:none;
+    	}
+    	html,body,#gameBox{
+    		width:100%;
+    		height:100%;
+    		background-color:rgba(0,0,0,0);
+    	}
+    	#picBox,#holdBox,#pannel{
+    		width:100%;
+    	}
+
+    	#holdBox{
+    		height:50%;
+    		position:fixed;
+    		top:10px;
+    		left:0;
+    	}
+
+    	#picBox,#pannel{
+    		height:50%;
+    		padding:10px 0;
+    	}
+    	#picBox img,.hold{
+    		width:18%;
+    		height:100%;
+    		float:left;
+    	}
+    	#picBox img{
+    		margin:0 1%;
+    		border-radius:9px;
+    	}
+    	.hold{
+    		margin:0 1%;
+    		height:100%;
+    		color:white;
+    		font-size:20px;
+    		font-weight:bold;
+    		background-color:rgba(0,0,0,0.3);
+    		text-align:center;
+    		border-radius:10px;
+    		opacity: 0;
+    	}
+    	.left{
+    		float:left;
+    	}
+    	.right{
+    		float:right;
+    	}
+    	.clear{
+    		clear:both;
+    	}
+    	#pannel{
+    		padding:0 1%;
+    	}
+    	#scoreBox{
+    		width:20%;
+			height:97%;
+    	}
+    	#msgBox{
+    		width:58%;
+			height:97%;
+			margin:0 1%;
+			border:1px solid #0d0;
+			color:white;
+			background-color:rgba(0,0,0,0.3);
+			padding:10px;
+			border-radius:5px;
+			overflow-y:scroll;
+    	}
+    	#play{
+    		width:20%;
+			height:97%;
+			border-radius:5px;
+			color:white;
+			font-size:35px;
+			font-weight:bold;
+    		background-color:#0d0;
+    	}
+    	#play:active{
+    		background-color:green;
+    		font-size:30px;
+    	}
+    	.row{
+    		height:30%;
+    		border-radius:5px;
+    		background-color:white;
+    		width:100%;
+    		border:1px solid #0d0;
+    	}
+    	.row input{
+    		width:100%;
+    		margin:0 auto;
+    	}
+    	.label{
+    		text-align:center;
+    		padding:2px;
+    		color:white;
+    		background-color:#0d0;
+    	}
+    	#BG{
+    		width:100%;
+    		height:100%;
+    		position: fixed;
+    		top:0;
+    		left:0;
+    	}
+    </style>
+</head>
+<body>
+	<!--<div id="loterry">
+		<div class="title">倍率</div>
+		<div class="items"><i>五　　同 :</i><a>750 倍</a></div>
+		<div class="items"><i>同花大顺 :</i><a>250 倍</a></div>
+		<div class="items"><i>同　花顺 :</i><a>120 倍</a></div>
+		<div class="items"><i>四　　同 :</i><a>60 倍</a></div>
+		<div class="items"><i>葫　　芦 :</i><a>10 倍</a></div>
+		<div class="items"><i>同　　花 :</i><a>7 倍</a></div>
+		<div class="items"><i>顺　　子 :</i><a>5 倍</a></div>
+		<div class="items"><i>三　　同 :</i><a>3 倍</a></div>
+		<div class="items"><i>两　　对 :</i><a>2 倍</a></div>
+		<div class="items"><i>一　　对 :</i><a>1 倍</a></div>
+	</div>-->
+	<div id="gameBox">
+
+		<div id="holdBox">
+			<div class="hold"></div>
+			<div class="hold"></div>
+			<div class="hold"></div>
+			<div class="hold"></div>
+			<div class="hold"></div>
+		</div>
+		<div class="clear"></div>
+
+		<div id="picBox">
+			<img src="../image/p1.png" data-hold="0" alt="">
+			<img src="../image/p1.png" data-hold="0" alt="">
+			<img src="../image/p1.png" data-hold="0" alt="">
+			<img src="../image/p1.png" data-hold="0" alt="">
+			<img src="../image/p1.png" data-hold="0" alt="">
+
+		</div>
+		<div class="clear"></div>
+
+
+		<div id="pannel">
+			<div id="scoreBox" class="scoreBox left fx fx-jus-spa-bet fx-dir-ttb">
+				<div class="row"><div class="label">得分</div><input style="padding:3px;" id="winScore" class="inputs" type="text" disabled="true" value=0></div>
+				<div class="row"><div class="label">押分<span id="bet">50</span></div><input style="padding:3px;" type="range" min="10" max="200" step="10" value="10" id="betHandle"></div>
+				<div class="row"><div class="label">积分</div><input style="padding:3px;" class="inputs" type="text" disabled="true" value=1000 id="score"></div>
+			</div>
+
+			<div id="msgBox" style="position:relative;" class="left break-word">
+
+			</div>
+			<div id="mscSwitch" style="padding:5px; border-radius:5px;position:fixed;z-index:9999; right:10px; top:10px; background-color:rgba(0,0,0,0.3); color:white;">关闭音乐</div>
+			<input id="play" type="button" class="right" value="启动">
+		</div> style="padding:5px;"
+		<!-- 统计数据 -->
+		<!--<div id="tongji">
+			<div id="playWinScore"></div>
+			<div id="playLoseScore"></div>
+			<div id="playdraw"></div>
+			<div id="playwin"></div>
+			<div id="playlose"></div>
+			<div id="gameCount"></div>
+		</div>-->
+		<!-- 统计数据 -->
+	</div>
+
+	<!--<div id="won">
+		<div class="title">得分历史</div>
+		<div></div>
+	</div>-->
+<div class="clear"></div>
+<img id="BG" src="../image/fanfankanBG.jpg" alt="" />
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script src="../script/leo.js"></script>
+<script src="../script/betScore.js"></script>
+<script src="../script/game.js"></script>
+<script type="text/javascript">
+	apiready = function(){
+		"游戏正在加载中，请稍等……".toast("70%");
+		var audio=api.require('audio');
+		//确保HOLD得高和行高正常，并见背景置底
+		setTimeout(function(){
+			l("#BG").obj.style.zIndex=-999;
+			var height=l("#picBox img[1]").offset("Height");
+			l(".hold").each(function(obj){
+				obj.style.lineHeight=height+"px";
+				obj.style.height=height+"px";
+			})
+		},1000)
+		//按返回键
+        api.addEventListener({
+	        name:'keyback'
+        },function(ret,err){
+        	//将屏幕方向设置为垂直
+        	api.setScreenOrientation({
+	            orientation:'portrait_down'
+            });
+            //关闭窗口
+			api.closeWin({});
+        });
+        //循环播放背景音乐
+		function playBGM(){
+			audio.play({
+				path:"widget://music/BGM.wav"
+			},function(ret,err){
+				if(ret){
+					if(ret.complete==true){
+						playBGM();
+					}
+				}
+			})
+		}
+
+		var isPlayed = true
+		var mscSwitch = document.getElementById('mscSwitch')
+		mscSwitch.onclick = stop
+		function stop(){
+			var str = ""
+			if(isPlayed){
+				str = "开启"
+				audio.pause();
+			}else{
+				str = "关闭"
+				audio.play()
+			}
+
+			mscSwitch.innerHTML = str + "音乐"
+			isPlayed = !isPlayed
+		}
+		playBGM();
+	};
+</script>
+</html>

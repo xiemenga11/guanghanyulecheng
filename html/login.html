@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>login</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <style>
+    	body{
+    		background-color:#eee;
+    		padding-top:10px;
+    	}
+    	#loginBox,.row{
+    		width:100%;
+    	}
+    	.row{
+    		margin-bottom:10px;
+    	}
+    	.row{
+    		border-top:1px solid #007aff;
+    		border-bottom:1px solid #007aff;
+    		background-color:white;
+    		
+    	}
+    	.row label,.row input{
+    		padding:20px;
+    	}
+    	.row label,#loginBtn{
+    		background-color:#007aff;
+    		color:white;
+    	}
+    	#loginBtn{
+    		width:90%;
+    		margin:10px 5%;
+    		padding:20px;
+    		border-radius:5px;
+    	}
+    	#toSignup{
+    		color:#007AFF;
+    	}
+    </style>
+</head>
+<body>
+	<div id="loginBox">
+		<div class="row">
+			<label for="userid">账号</label>
+			<input id="userid" type="text" placeholder="请输入账号" required="required" />
+		</div>
+		<div class="row">
+			<label for="password">密码</label>
+			<input id="password" type="password" placeholder="请输入密码" required="required" />
+		</div>
+		<input type="button" id="loginBtn" value="登录" />
+	</div>
+	
+	<div style="text-align:center;">
+		<a style="color:#007aff;" id="toSignup">注册</a> |
+		<a style="color:#007aff;" id="rule">阅读条款</a>
+	</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script src="../script/leo.js"></script>
+<script type="text/javascript">
+	apiready = function(){
+		l("#toSignup").listen("click",function(){
+			api.openWin({
+	            name: 'signup',
+	            url: 'signup.html'
+            });
+		})
+	};
+</script>
+</html>

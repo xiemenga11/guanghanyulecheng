@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>Hello APP</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+	<style>
+		*{
+			padding:0;
+			margin:0;
+			box-sizing:border-box;
+		}
+		html,body{
+			height:100%;
+			width:100%;
+		}
+		#con{
+			margin: 10px;
+			font-size: 24px;
+		}
+		#main{
+			width:100%;
+			height:100%;
+		}
+		.item{
+			width:96%;
+			margin:10px 2%;
+			height:120px;
+			background-color:lightblue;
+      line-height: 120px;
+      font-size: 30px;
+			border-radius:5px;
+			text-align:center;
+			font-size:30px;
+			color:white;
+			font-weight:bold;
+			box-shadow:2px 2px 2px rgba(0,0,0,0.5);
+		}
+		.item img{
+			width:100%;
+			height:100%;
+		}
+	</style>
+</head>
+<body>
+    <div id="main">
+    	<div id="fanpaiji" class="item">
+    		<img src="../image/fanfankanlogo.jpg" alt="" />
+    	</div>
+    	<div class="item">
+    	  更多正在开发……
+    	</div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function(){
+    	var audio=api.require('audio');
+		var fanpaiji=$api.dom("#fanpaiji");
+		fanpaiji.onclick=function(){
+			api.openWin({
+	            name: 'baidu',
+	            url: 'fanpaiji.html'
+            });
+            api.setScreenOrientation({
+	        	orientation:'landscape_left'
+        	});
+		}
+
+		//循环播放背景音乐
+		function playBGM(){
+			audio.play({
+				path:"widget://music/indexBGM.wav"
+			},function(ret,err){
+				if(ret){
+					if(ret.complete==true){
+						playBGM();
+					}
+				}
+			})
+		}
+		playBGM();
+		//切换到其他应用时，关闭背景音乐
+		api.addEventListener({
+	        name:'viewdisappear'
+        },function(ret,err){
+        	audio.pause();
+        });
+        //切回主界面时播放背景音乐
+        api.addEventListener({
+	        name:'viewappear'
+        },function(ret,err){
+        	playBGM();
+        });
+    };
+</script>
+</html>
